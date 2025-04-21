@@ -1,0 +1,10 @@
+@import '../../assets/styles/animations.css';
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 5s infinite;
+  opacity: 0.8;
+  filter: blur(1px);
+  z-index: 0;
+}

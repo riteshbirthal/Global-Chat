@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { ChatProvider } from './context/chatContext';
+import { AuthModal } from './components/AuthModal/authmodal';
+import { Sidebar } from './components/Sidebar/sidebar';
+import { ChatContainer } from './components/ChatContainer/chatcontainer';
+import styles from './App.module.css';
+import { useState } from 'react';
 
-function App() {
+export const App = () => {
+  const [userAuthenticated, setUserAuthenticated] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChatProvider>
+      <div className={styles.app}>
+        {!userAuthenticated ? (<AuthModal setUserAuthenticated={setUserAuthenticated} />) :
+        (<div className={styles.main}>
+          <div className={styles.AppSidebar}>
+            <Sidebar />
+          </div>
+          <div className={styles.AppChatContainer}>
+            <ChatContainer />
+          </div>
+        </div>)}
+      </div>
+    </ChatProvider>
   );
-}
-
-export default App;
+};
